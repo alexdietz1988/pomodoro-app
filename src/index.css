@@ -1,0 +1,15 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  max-width: 1000px;
+  margin-inline: auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
