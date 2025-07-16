@@ -3,6 +3,11 @@ import * as Styled from './App.styles.ts';
 
 const defaultDuration = 25 * 60 * 1000;
 
+interface PomodoroLogEntry {
+  date: string;
+  count: number;
+}
+
 const App = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
@@ -13,34 +18,57 @@ const App = () => {
     .toString()
     .padStart(2, '0');
 
+  const [pomodoroLog, setPomodoroLog] = useState<PomodoroLogEntry[]>([
+    { date: new Date().toLocaleDateString(), count: 0 },
+  ]);
+
   useEffect(() => {
     if (!isRunning) return;
+    const updateLog = () => {
+      const today = new Date().toLocaleDateString();
+      if (pomodoroLog[pomodoroLog.length - 1].date !== today) return;
+      const previousCount = pomodoroLog[pomodoroLog.length - 1].count;
+      setPomodoroLog((prevLog) => [
+        ...prevLog.slice(0, -1),
+        { date: today, count: previousCount + 1 },
+      ]);
+    };
     setMillisecondsLeft(defaultDuration - 1000);
     const interval = setInterval(() => {
       setMillisecondsLeft((prev) => {
         if (prev <= 1000) {
           setIsRunning(false);
+          updateLog();
           return 0;
         }
         return prev - 1000;
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [isRunning]);
+  }, [isRunning, pomodoroLog]);
 
   useEffect(() => {
     document.title = `Pomodoro Timer (${minutesLeft}:${secondsLeft})`;
   }, [minutesLeft, secondsLeft]);
 
   return (
-    <Styled.Timer>
+    <>
+      <Styled.Timer>
+        <div>
+          {minutesLeft}:{secondsLeft}
+        </div>
+        <button onClick={() => setIsRunning((prev) => !prev)}>
+          {isRunning ? 'Pause' : 'Start'}
+        </button>
+      </Styled.Timer>
       <div>
-        {minutesLeft}:{secondsLeft}
+        {pomodoroLog.map((entry) => (
+          <>
+            {entry.date}: {entry.count}
+          </>
+        ))}
       </div>
-      <button onClick={() => setIsRunning((prev) => !prev)}>
-        {isRunning ? 'Pause' : 'Start'}
-      </button>
-    </Styled.Timer>
+    </>
   );
 };
 
