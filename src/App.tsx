@@ -33,7 +33,6 @@ const App = () => {
         { date: today, count: previousCount + 1 },
       ]);
     };
-    setMillisecondsLeft(defaultDuration - 1000);
     const interval = setInterval(() => {
       setMillisecondsLeft((prev) => {
         if (prev <= 1000) {
@@ -68,6 +67,14 @@ const App = () => {
           </>
         ))}
       </div>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/zh_pECrHHOY"
+        title="YouTube video player"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
     </>
   );
 };

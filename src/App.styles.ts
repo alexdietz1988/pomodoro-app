@@ -24,3 +24,6 @@ export const Timer = styled.div`
     }
   }
 `;
+
+export const Log = styled.div`
+`;
