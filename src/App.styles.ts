@@ -1,10 +1,26 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+`;
+
+export const TimerAndLog = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+
+  & > div {
+    flex: 1;
+    padding: 1.5rem;
+  }
+`;
+
 export const Timer = styled.div`
   border: 1px solid #ccc;
   border-radius: 8px;
-  display: inline-block;
-  padding: 1.5rem;
   text-align: center;
   background-color: red;
 
@@ -26,4 +42,12 @@ export const Timer = styled.div`
 `;
 
 export const Log = styled.div`
+  border: 1px solid #ccc;
+  border-radius: 8px;
+`;
+
+export const Iframe = styled.iframe`
+  border: none;
+  width: 100%;
+  height: 400px;
 `;

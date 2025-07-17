@@ -53,31 +53,31 @@ const App = () => {
   }
 
   return (
-    <>
-      <Styled.Timer>
-        <div>
-          {minutesLeft}:{secondsLeft}
-        </div>
-        <button onClick={() => setIsRunning((prev) => !prev)}>
-          {isRunning ? 'Pause' : 'Start'}
-        </button>
-      </Styled.Timer>
-      <div>
-        {pomodoroLog.map((entry) => (
-          <>
-            {entry.date}: {entry.count}
-          </>
-        ))}
-      </div>
-      <iframe
-        width="560"
-        height="315"
+    <Styled.Container>
+      <Styled.TimerAndLog>
+        <Styled.Timer>
+          <div>
+            {minutesLeft}:{secondsLeft}
+          </div>
+          <button onClick={() => setIsRunning((prev) => !prev)}>
+            {isRunning ? 'Pause' : 'Start'}
+          </button>
+        </Styled.Timer>
+        <Styled.Log>
+          {pomodoroLog.map((entry) => (
+            <>
+              {entry.date}: {entry.count}
+            </>
+          ))}
+        </Styled.Log>
+      </Styled.TimerAndLog>
+      <Styled.Iframe
         src="https://www.youtube.com/embed/zh_pECrHHOY"
         title="YouTube video player"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-      ></iframe>
-    </>
+      ></Styled.Iframe>
+    </Styled.Container>
   );
 };
 
