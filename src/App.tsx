@@ -52,6 +52,20 @@ const App = () => {
     setMillisecondsLeft(defaultDuration);
   }
 
+  const currentMonth = new Date().getMonth();
+  const daysInMonth = Array.from(
+    {
+      length: new Date(new Date().getFullYear(), currentMonth + 1, 0).getDate(),
+    },
+    (_, i) => {
+      const newDate = new Date(new Date().getFullYear(), currentMonth, i + 1);
+      return {
+        date: newDate.toLocaleDateString(),
+        day: newDate.getDay(),
+      };
+    }
+  );
+
   return (
     <Styled.Container>
       <Styled.TimerAndLog>
@@ -64,6 +78,12 @@ const App = () => {
           </button>
         </Styled.Timer>
         <Styled.Log>
+          <div>{currentMonth}</div>
+          {daysInMonth.map((day) => (
+            <div>
+              {day.date}, {day.day}
+            </div>
+          ))}
           {pomodoroLog.map((entry) => (
             <>
               {entry.date}: {entry.count}
