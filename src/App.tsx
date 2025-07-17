@@ -10,45 +10,47 @@ interface PomodoroLogEntry {
 
 const App = () => {
   const [isRunning, setIsRunning] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
+  const [pomodoroLog, setPomodoroLog] = useState<PomodoroLogEntry[]>([
+    { date: new Date().toLocaleDateString(), count: 0 },
+  ]);
   const minutesLeft = Math.floor(millisecondsLeft / 1000 / 60)
     .toString()
     .padStart(2, '0');
   const secondsLeft = Math.floor((millisecondsLeft / 1000) % 60)
     .toString()
     .padStart(2, '0');
-
-  const [pomodoroLog, setPomodoroLog] = useState<PomodoroLogEntry[]>([
-    { date: new Date().toLocaleDateString(), count: 0 },
-  ]);
+  document.title = `Pomodoro Timer (${minutesLeft}:${secondsLeft})`;
 
   useEffect(() => {
     if (!isRunning) return;
-    const updateLog = () => {
-      const today = new Date().toLocaleDateString();
-      if (pomodoroLog[pomodoroLog.length - 1].date !== today) return;
-      const previousCount = pomodoroLog[pomodoroLog.length - 1].count;
-      setPomodoroLog((prevLog) => [
-        ...prevLog.slice(0, -1),
-        { date: today, count: previousCount + 1 },
-      ]);
-    };
     const interval = setInterval(() => {
       setMillisecondsLeft((prev) => {
-        if (prev <= 1000) {
-          setIsRunning(false);
-          updateLog();
-          return 0;
+        if (prev === 1000) {
+          setIsCompleted(true);
         }
         return prev - 1000;
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [isRunning, pomodoroLog]);
+  }, [isRunning]);
 
-  useEffect(() => {
-    document.title = `Pomodoro Timer (${minutesLeft}:${secondsLeft})`;
-  }, [minutesLeft, secondsLeft]);
+  const updateLog = () => {
+    const today = new Date().toLocaleDateString();
+    if (pomodoroLog[pomodoroLog.length - 1].date !== today) return;
+    const previousCount = pomodoroLog[pomodoroLog.length - 1].count;
+    setPomodoroLog((prevLog) => [
+      ...prevLog.slice(0, -1),
+      { date: today, count: previousCount + 1 },
+    ]);
+  };
+  if (isCompleted) {
+    setIsRunning(false);
+    updateLog();
+    setIsCompleted(false);
+    setMillisecondsLeft(defaultDuration);
+  }
 
   return (
     <>
