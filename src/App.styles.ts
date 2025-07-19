@@ -46,6 +46,10 @@ export const Log = styled.div`
   border-radius: 8px;
 `;
 
+export const LogEntry = styled.div<{ isWeekend?: boolean }>`
+  color: ${(props) => (props.isWeekend ? 'pink' : 'black')};
+`;
+
 export const Iframe = styled.iframe`
   border: none;
   width: 100%;

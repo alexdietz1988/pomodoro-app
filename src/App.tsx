@@ -84,10 +84,10 @@ const App = () => {
               (entry) => entry.date === day.date
             );
             return (
-              <div>
+              <Styled.LogEntry isWeekend={day.day === 0 || day.day === 6} key={day.date}>
                 {day.date} {logEntry && logEntry.count}
                 {/* , {day.day} */}
-              </div>
+              </Styled.LogEntry>
             );
           })}
         </Styled.Log>
