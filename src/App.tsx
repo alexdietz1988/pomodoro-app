@@ -61,7 +61,9 @@ const App = () => {
     (_, i) => {
       const newDate = new Date(currentYear, currentMonth, i + 1);
       const day = newDate.getDay();
+      const date = newDate.getDate();
       return {
+        date: date.toString().padStart(2, '0'),
         fullDate: newDate.toLocaleDateString(),
         isWeekend: day === 0 || day === 6,
       };
@@ -70,29 +72,39 @@ const App = () => {
 
   return (
     <Styled.Container>
+      <h1>Pomodoro App</h1>
       <Styled.TimerAndLog>
-        <Styled.Timer>
-          <div>
-            {minutesLeft}:{secondsLeft}
-          </div>
-          <button onClick={() => setIsRunning((prev) => !prev)}>
-            {isRunning ? 'Pause' : 'Start'}
-          </button>
-        </Styled.Timer>
-        <Styled.Log>
-          {/* {new Date().toLocaleString('default', { month: 'long' })} */}
-          {datesInCurrentMonth.map((date) => {
-            const logEntry = pomodoroLog.find(
-              (entry) => entry.date === date.fullDate
-            );
-            return (
-              <Styled.LogEntry isWeekend={date.isWeekend} key={date.fullDate}>
-                {date.fullDate} {logEntry && logEntry.count}
-                {/* , {day.day} */}
-              </Styled.LogEntry>
-            );
-          })}
-        </Styled.Log>
+        <Styled.TimerContainer>
+          <Styled.Timer>
+            <div>
+              {minutesLeft}:{secondsLeft}
+            </div>
+            <button onClick={() => setIsRunning((prev) => !prev)}>
+              {isRunning ? 'Pause' : 'Start'}
+            </button>
+          </Styled.Timer>
+        </Styled.TimerContainer>
+        <Styled.LogContainer>
+          <h2>{new Date().toLocaleString('default', { month: 'long' })}</h2>
+          <Styled.Log>
+            {datesInCurrentMonth.map((date) => {
+              const logEntry = pomodoroLog.find(
+                (entry) => entry.date === date.fullDate
+              );
+              return (
+                <Styled.LogEntry isWeekend={date.isWeekend} key={date.fullDate}>
+                  <div>{date.date}</div>
+                  <Styled.CircleContainer>
+                    {logEntry &&
+                      Array(logEntry.count)
+                        .fill(0)
+                        .map(() => <Styled.Circle />)}
+                  </Styled.CircleContainer>
+                </Styled.LogEntry>
+              );
+            })}
+          </Styled.Log>
+        </Styled.LogContainer>
       </Styled.TimerAndLog>
       <Styled.Iframe
         src="https://www.youtube.com/embed/zh_pECrHHOY"
