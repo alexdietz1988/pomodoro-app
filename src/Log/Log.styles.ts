@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const LogContainer = styled.div`
   text-align: center;
@@ -40,6 +40,21 @@ export const Circle = styled.div<{ inProgress?: boolean }>`
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background-color: ${(props) =>
-    props.inProgress ? 'blue' : 'hsl(0, 100%, 62%)'};
+  background-color: hsl(0, 100%, 62%);
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0.25;
+    }
+    to {
+      opacity: 0.75;
+    }
+  }
+
+  ${(props) =>
+    props.inProgress &&
+    css`
+      background-color: hsl(0, 100%, 60%);
+      animation: fadeIn 1s ease-in-out alternate infinite;
+    `}
 `;
