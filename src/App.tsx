@@ -21,7 +21,7 @@ const App = () => {
   const secondsLeft = Math.floor((millisecondsLeft / 1000) % 60)
     .toString()
     .padStart(2, '0');
-  document.title = `Pomodoro Timer (${minutesLeft}:${secondsLeft})`;
+  document.title = `Pomodoro App (${minutesLeft}:${secondsLeft})`;
 
   useEffect(() => {
     if (!isRunning) return;
