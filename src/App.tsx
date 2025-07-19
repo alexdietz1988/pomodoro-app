@@ -36,7 +36,7 @@ const App = () => {
     <Styled.Container>
       <h1>Pomodoro App</h1>
       <Styled.Content>
-        <Timer pomodoroLog={pomodoroLog} setPomodoroLog={setPomodoroLog} />
+        <Timer setPomodoroLog={setPomodoroLog} />
         <Log pomodoroLog={pomodoroLog} />
         <Video />
         <button
