@@ -1,7 +1,13 @@
 import * as Styled from './Log.styles';
 import { type PomodoroLogEntry } from '../App';
 
-const Log = ({ pomodoroLog }: { pomodoroLog: PomodoroLogEntry[] }) => {
+interface LogProps {
+  pomodoroLog: PomodoroLogEntry[];
+  isInProgress: boolean;
+}
+
+const Log = ({ pomodoroLog, isInProgress }: LogProps) => {
+  const today = new Date().toLocaleDateString();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   const datesInCurrentMonth = Array.from(
@@ -35,6 +41,9 @@ const Log = ({ pomodoroLog }: { pomodoroLog: PomodoroLogEntry[] }) => {
                   Array(logEntry.count)
                     .fill(0)
                     .map((_, i) => <Styled.Circle key={`circle-${i}`} />)}
+                {isInProgress && date.fullDate === today && (
+                  <Styled.Circle inProgress />
+                )}
               </Styled.CircleContainer>
             </Styled.LogEntry>
           );

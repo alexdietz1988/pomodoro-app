@@ -14,6 +14,7 @@ export interface PomodoroLogEntry {
 const App = () => {
   const [pomodoroLog, setPomodoroLog] =
     useState<PomodoroLogEntry[]>(defaultPomodoroLog);
+  const [isInProgress, setIsInProgress] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
@@ -36,8 +37,11 @@ const App = () => {
     <Styled.Container>
       <h1>Pomodoro App</h1>
       <Styled.Content>
-        <Timer setPomodoroLog={setPomodoroLog} />
-        <Log pomodoroLog={pomodoroLog} />
+        <Timer
+          setPomodoroLog={setPomodoroLog}
+          setIsInProgress={setIsInProgress}
+        />
+        <Log pomodoroLog={pomodoroLog} isInProgress={isInProgress} />
         <Video />
         <button
           onClick={() => {

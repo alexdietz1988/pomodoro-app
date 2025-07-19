@@ -20,12 +20,13 @@ const getNewPomodoroLog = (currentLog: PomodoroLogEntry[]) => {
 
 interface TimerProps {
   setPomodoroLog: React.Dispatch<React.SetStateAction<PomodoroLogEntry[]>>;
+  setIsInProgress: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const formatTime = (time: number) =>
   Math.floor(time).toString().padStart(2, '0');
 
-const Timer = ({ setPomodoroLog }: TimerProps) => {
+const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
@@ -50,11 +51,12 @@ const Timer = ({ setPomodoroLog }: TimerProps) => {
   useEffect(() => {
     if (isCompleted) {
       setIsRunning(false);
+      setIsInProgress(false);
       setPomodoroLog((prevLog) => getNewPomodoroLog(prevLog));
       setIsCompleted(false);
       setMillisecondsLeft(defaultDuration);
     }
-  }, [isCompleted, setPomodoroLog]);
+  }, [isCompleted, setPomodoroLog, setIsInProgress]);
 
   return (
     <Styled.Timer>
@@ -63,7 +65,10 @@ const Timer = ({ setPomodoroLog }: TimerProps) => {
       </div>
       <button
         onClick={() => {
-          if (!isRunning) setMillisecondsLeft((prev) => prev - 1000);
+          if (!isRunning) {
+            setIsInProgress(true);
+            setMillisecondsLeft((prev) => prev - 1000);
+          }
           setIsRunning((prev) => !prev);
         }}
       >

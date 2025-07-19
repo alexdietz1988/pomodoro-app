@@ -36,9 +36,10 @@ export const CircleContainer = styled.div`
   gap: 0.1rem;
 `;
 
-export const Circle = styled.div`
+export const Circle = styled.div<{ inProgress?: boolean }>`
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background-color: hsl(0, 100%, 62%);
+  background-color: ${(props) =>
+    props.inProgress ? 'blue' : 'hsl(0, 100%, 62%)'};
 `;
