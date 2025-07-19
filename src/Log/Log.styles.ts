@@ -19,7 +19,11 @@ export const Log = styled.div`
   flex-wrap: wrap;
 `;
 
-export const LogEntry = styled.div<{ isWeekend?: boolean }>`
+export const LogEntry = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isWeekend',
+})<{
+  isWeekend?: boolean;
+}>`
   color: ${(props) => (props.isWeekend ? 'pink' : 'inherit')};
   display: flex;
   align-items: center;

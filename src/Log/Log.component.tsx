@@ -34,7 +34,7 @@ const Log = ({ pomodoroLog }: { pomodoroLog: PomodoroLogEntry[] }) => {
                 {logEntry &&
                   Array(logEntry.count)
                     .fill(0)
-                    .map(() => <Styled.Circle />)}
+                    .map((_, i) => <Styled.Circle key={`circle-${i}`} />)}
               </Styled.CircleContainer>
             </Styled.LogEntry>
           );
