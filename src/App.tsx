@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import * as Styled from './App.styles.ts';
 
 const defaultDuration = 25 * 60 * 1000;
+const defaultPomodoroLog: PomodoroLogEntry[] = [
+  { date: new Date().toLocaleDateString(), count: 0 },
+];
 
 interface PomodoroLogEntry {
   date: string;
@@ -12,9 +15,10 @@ const App = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
-  const [pomodoroLog, setPomodoroLog] = useState<PomodoroLogEntry[]>([
-    { date: new Date().toLocaleDateString(), count: 3 },
-  ]);
+
+  const [pomodoroLog, setPomodoroLog] =
+    useState<PomodoroLogEntry[]>(defaultPomodoroLog);
+
   const minutesLeft = Math.floor(millisecondsLeft / 1000 / 60)
     .toString()
     .padStart(2, '0');
@@ -22,6 +26,13 @@ const App = () => {
     .toString()
     .padStart(2, '0');
   document.title = `Pomodoro App (${minutesLeft}:${secondsLeft})`;
+
+  useEffect(() => {
+    const storedLog = localStorage.getItem('pomodoroLog');
+    if (storedLog) {
+      setPomodoroLog(JSON.parse(storedLog));
+    }
+  }, []);
 
   useEffect(() => {
     if (!isRunning) return;
@@ -51,6 +62,11 @@ const App = () => {
     setIsCompleted(false);
     setMillisecondsLeft(defaultDuration);
   }
+
+  useEffect(() => {
+    if (pomodoroLog !== defaultPomodoroLog)
+      localStorage.setItem('pomodoroLog', JSON.stringify(pomodoroLog));
+  }, [pomodoroLog]);
 
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
