@@ -21,28 +21,6 @@ const Timer = ({ setPomodoroLog }: TimerProps) => {
   const secondsLeft = formatTime((millisecondsLeft / 1000) % 60);
   document.title = `Pomodoro App (${minutesLeft}:${secondsLeft})`;
 
-  const updateLog = () => {
-    const today = new Date().toLocaleDateString();
-    setPomodoroLog((prevLog) => {
-      if (prevLog.length === 0) {
-        return [{ date: today, count: 1 }];
-      }
-      const lastEntry = prevLog[prevLog.length - 1];
-      if (lastEntry.date !== today) {
-        return [...prevLog, { date: today, count: 1 }];
-      }
-      const updatedCount = lastEntry.count + 1;
-      return [...prevLog.slice(0, -1), { date: today, count: updatedCount }];
-    });
-  };
-
-  if (isCompleted) {
-    setIsRunning(false);
-    updateLog();
-    setIsCompleted(false);
-    setMillisecondsLeft(defaultDuration);
-  }
-
   useEffect(() => {
     if (!isRunning) return;
     const interval = setInterval(() => {
@@ -54,7 +32,29 @@ const Timer = ({ setPomodoroLog }: TimerProps) => {
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [isRunning]);
+  }, [isRunning, setPomodoroLog]);
+
+  useEffect(() => {
+    const updateLog = () => {
+      const today = new Date().toLocaleDateString();
+      setPomodoroLog((prevLog) => {
+        if (prevLog.length === 0) {
+          return [{ date: today, count: 1 }];
+        }
+        const lastEntry = prevLog[prevLog.length - 1];
+        if (lastEntry.date !== today) {
+          return [...prevLog, { date: today, count: 1 }];
+        }
+        const updatedCount = lastEntry.count + 1;
+        return [...prevLog.slice(0, -1), { date: today, count: updatedCount }];
+      });
+    };
+    if (isCompleted) {
+      setIsRunning(false);
+      updateLog();
+      setIsCompleted(false);
+    }
+  }, [isCompleted, setPomodoroLog]);
 
   return (
     <Styled.Timer>
