@@ -4,22 +4,22 @@ import { type PomodoroLogEntry } from '../App';
 
 const defaultDuration = 25 * 60 * 1000;
 
-const Timer = ({
-  pomodoroLog,
-  setPomodoroLog,
-}: {
+interface TimerProps {
   pomodoroLog: PomodoroLogEntry[];
   setPomodoroLog: React.Dispatch<React.SetStateAction<PomodoroLogEntry[]>>;
-}) => {
+}
+
+const formatTime = (time: number) =>
+  Math.floor(time).toString().padStart(2, '0');
+
+const Timer = ({ pomodoroLog, setPomodoroLog }: TimerProps) => {
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
-  const minutesLeft = Math.floor(millisecondsLeft / 1000 / 60)
-    .toString()
-    .padStart(2, '0');
-  const secondsLeft = Math.floor((millisecondsLeft / 1000) % 60)
-    .toString()
-    .padStart(2, '0');
+  
+  const minutesLeft = formatTime(millisecondsLeft / 1000 / 60);
+  const secondsLeft = formatTime((millisecondsLeft / 1000) % 60);
+  document.title = `Pomodoro App (${minutesLeft}:${secondsLeft})`;
 
   const updateLog = () => {
     const today = new Date().toLocaleDateString();
@@ -37,7 +37,7 @@ const Timer = ({
     setIsCompleted(false);
     setMillisecondsLeft(defaultDuration);
   }
-  document.title = `Pomodoro App (${minutesLeft}:${secondsLeft})`;
+  
 
   useEffect(() => {
     if (!isRunning) return;
