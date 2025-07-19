@@ -4,9 +4,7 @@ import Timer from './Timer/Timer.component.tsx';
 import Log from './Log/Log.component.tsx';
 import Video from './Video/Video.component.tsx';
 
-const defaultPomodoroLog: PomodoroLogEntry[] = [
-  { date: new Date().toLocaleDateString(), count: 0 },
-];
+const defaultPomodoroLog: PomodoroLogEntry[] = [];
 
 export interface PomodoroLogEntry {
   date: string;
@@ -16,6 +14,7 @@ export interface PomodoroLogEntry {
 const App = () => {
   const [pomodoroLog, setPomodoroLog] =
     useState<PomodoroLogEntry[]>(defaultPomodoroLog);
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     const storedLog = localStorage.getItem('pomodoroLog');
@@ -23,10 +22,15 @@ const App = () => {
       setPomodoroLog(JSON.parse(storedLog));
     }
   }, []);
+
   useEffect(() => {
-    if (pomodoroLog !== defaultPomodoroLog)
+    if (isResetting || pomodoroLog !== defaultPomodoroLog) {
       localStorage.setItem('pomodoroLog', JSON.stringify(pomodoroLog));
-  }, [pomodoroLog]);
+    }
+    if (isResetting) {
+      setIsResetting(false);
+    }
+  }, [pomodoroLog, isResetting]);
 
   return (
     <Styled.Container>
@@ -36,6 +40,14 @@ const App = () => {
         <Log pomodoroLog={pomodoroLog} />
       </Styled.TimerAndLog>
       <Video />
+      <button
+        onClick={() => {
+          setPomodoroLog(defaultPomodoroLog);
+          setIsResetting(true);
+        }}
+      >
+        Reset Log
+      </button>
     </Styled.Container>
   );
 };

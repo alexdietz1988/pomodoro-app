@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import * as Styled from './Timer.styles';
 import { type PomodoroLogEntry } from '../App';
 
-const defaultDuration = 25 * 60 * 1000;
+// const defaultDuration = 25 * 60 * 1000;
+const defaultDuration = 3000;
 
 interface TimerProps {
   pomodoroLog: PomodoroLogEntry[];
@@ -16,14 +17,21 @@ const Timer = ({ pomodoroLog, setPomodoroLog }: TimerProps) => {
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
-  
+
   const minutesLeft = formatTime(millisecondsLeft / 1000 / 60);
   const secondsLeft = formatTime((millisecondsLeft / 1000) % 60);
   document.title = `Pomodoro App (${minutesLeft}:${secondsLeft})`;
 
   const updateLog = () => {
     const today = new Date().toLocaleDateString();
-    if (pomodoroLog[pomodoroLog.length - 1].date !== today) return;
+    if (pomodoroLog.length === 0) {
+      setPomodoroLog(() => [{ date: today, count: 1 }]);
+      return;
+    }
+    if (pomodoroLog[pomodoroLog.length - 1].date !== today) {
+      setPomodoroLog((prevLog) => [...prevLog, { date: today, count: 1 }]);
+      return;
+    }
     const previousCount = pomodoroLog[pomodoroLog.length - 1].count;
     setPomodoroLog((prevLog) => [
       ...prevLog.slice(0, -1),
@@ -37,7 +45,6 @@ const Timer = ({ pomodoroLog, setPomodoroLog }: TimerProps) => {
     setIsCompleted(false);
     setMillisecondsLeft(defaultDuration);
   }
-  
 
   useEffect(() => {
     if (!isRunning) return;
