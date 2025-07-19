@@ -13,7 +13,7 @@ const App = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
   const [pomodoroLog, setPomodoroLog] = useState<PomodoroLogEntry[]>([
-    { date: new Date().toLocaleDateString(), count: 0 },
+    { date: new Date().toLocaleDateString(), count: 3 },
   ]);
   const minutesLeft = Math.floor(millisecondsLeft / 1000 / 60)
     .toString()
@@ -78,17 +78,18 @@ const App = () => {
           </button>
         </Styled.Timer>
         <Styled.Log>
-          <div>{currentMonth}</div>
-          {daysInMonth.map((day) => (
-            <div>
-              {day.date}, {day.day}
-            </div>
-          ))}
-          {pomodoroLog.map((entry) => (
-            <>
-              {entry.date}: {entry.count}
-            </>
-          ))}
+          {new Date().toLocaleString('default', { month: 'long' })}
+          {daysInMonth.map((day) => {
+            const logEntry = pomodoroLog.find(
+              (entry) => entry.date === day.date
+            );
+            return (
+              <div>
+                {day.date} {logEntry && logEntry.count}
+                {/* , {day.day} */}
+              </div>
+            );
+          })}
         </Styled.Log>
       </Styled.TimerAndLog>
       <Styled.Iframe
