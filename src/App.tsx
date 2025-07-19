@@ -53,15 +53,17 @@ const App = () => {
   }
 
   const currentMonth = new Date().getMonth();
-  const daysInMonth = Array.from(
+  const currentYear = new Date().getFullYear();
+  const datesInCurrentMonth = Array.from(
     {
-      length: new Date(new Date().getFullYear(), currentMonth + 1, 0).getDate(),
+      length: new Date(currentYear, currentMonth + 1, 0).getDate(),
     },
     (_, i) => {
-      const newDate = new Date(new Date().getFullYear(), currentMonth, i + 1);
+      const newDate = new Date(currentYear, currentMonth, i + 1);
+      const day = newDate.getDay();
       return {
-        date: newDate.toLocaleDateString(),
-        day: newDate.getDay(),
+        fullDate: newDate.toLocaleDateString(),
+        isWeekend: day === 0 || day === 6,
       };
     }
   );
@@ -78,14 +80,14 @@ const App = () => {
           </button>
         </Styled.Timer>
         <Styled.Log>
-          {new Date().toLocaleString('default', { month: 'long' })}
-          {daysInMonth.map((day) => {
+          {/* {new Date().toLocaleString('default', { month: 'long' })} */}
+          {datesInCurrentMonth.map((date) => {
             const logEntry = pomodoroLog.find(
-              (entry) => entry.date === day.date
+              (entry) => entry.date === date.fullDate
             );
             return (
-              <Styled.LogEntry isWeekend={day.day === 0 || day.day === 6} key={day.date}>
-                {day.date} {logEntry && logEntry.count}
+              <Styled.LogEntry isWeekend={date.isWeekend} key={date.fullDate}>
+                {date.fullDate} {logEntry && logEntry.count}
                 {/* , {day.day} */}
               </Styled.LogEntry>
             );

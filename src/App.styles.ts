@@ -44,6 +44,11 @@ export const Timer = styled.div`
 export const Log = styled.div`
   border: 1px solid #ccc;
   border-radius: 8px;
+  height: 22rem;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 `;
 
 export const LogEntry = styled.div<{ isWeekend?: boolean }>`
