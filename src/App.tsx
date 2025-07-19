@@ -35,19 +35,19 @@ const App = () => {
   return (
     <Styled.Container>
       <h1>Pomodoro App</h1>
-      <Styled.TimerAndLog>
+      <Styled.Content>
         <Timer pomodoroLog={pomodoroLog} setPomodoroLog={setPomodoroLog} />
         <Log pomodoroLog={pomodoroLog} />
-      </Styled.TimerAndLog>
-      <Video />
-      <button
-        onClick={() => {
-          setPomodoroLog(defaultPomodoroLog);
-          setIsResetting(true);
-        }}
-      >
-        Reset Log
-      </button>
+        <Video />
+        <button
+          onClick={() => {
+            setPomodoroLog(defaultPomodoroLog);
+            setIsResetting(true);
+          }}
+        >
+          Reset Log
+        </button>
+      </Styled.Content>
     </Styled.Container>
   );
 };

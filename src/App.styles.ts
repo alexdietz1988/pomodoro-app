@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  text-align: center;
+
+  h1 {
+    margin-block-end: 3rem;
+  }
 `;
 
-export const TimerAndLog = styled.div`
+export const Content = styled.div`
   display: flex;
-  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: end;
   gap: 2rem;
-
-  & > div {
-    flex: 1;
-    padding: 1.5rem;
-  }
 `;

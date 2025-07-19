@@ -60,21 +60,19 @@ const Timer = ({ pomodoroLog, setPomodoroLog }: TimerProps) => {
   }, [isRunning]);
 
   return (
-    <Styled.TimerContainer>
-      <Styled.Timer>
-        <div>
-          {minutesLeft}:{secondsLeft}
-        </div>
-        <button
-          onClick={() => {
-            if (!isRunning) setMillisecondsLeft((prev) => prev - 1000);
-            setIsRunning((prev) => !prev);
-          }}
-        >
-          {isRunning ? 'Pause' : 'Start'}
-        </button>
-      </Styled.Timer>
-    </Styled.TimerContainer>
+    <Styled.Timer>
+      <div>
+        {minutesLeft}:{secondsLeft}
+      </div>
+      <button
+        onClick={() => {
+          if (!isRunning) setMillisecondsLeft((prev) => prev - 1000);
+          setIsRunning((prev) => !prev);
+        }}
+      >
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+    </Styled.Timer>
   );
 };
 

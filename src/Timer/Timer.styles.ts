@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const TimerContainer = styled.div`
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const Timer = styled.div`
   border-radius: 1rem;
   text-align: center;
