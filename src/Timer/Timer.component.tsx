@@ -65,7 +65,12 @@ const Timer = ({ pomodoroLog, setPomodoroLog }: TimerProps) => {
         <div>
           {minutesLeft}:{secondsLeft}
         </div>
-        <button onClick={() => setIsRunning((prev) => !prev)}>
+        <button
+          onClick={() => {
+            if (!isRunning) setMillisecondsLeft((prev) => prev - 1000);
+            setIsRunning((prev) => !prev);
+          }}
+        >
           {isRunning ? 'Pause' : 'Start'}
         </button>
       </Styled.Timer>
