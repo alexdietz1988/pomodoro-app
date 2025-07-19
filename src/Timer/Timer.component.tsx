@@ -5,6 +5,19 @@ import { type PomodoroLogEntry } from '../App';
 const defaultDuration = 25 * 60 * 1000;
 // const defaultDuration = 3000;
 
+const getNewPomodoroLog = (currentLog: PomodoroLogEntry[]) => {
+  const today = new Date().toLocaleDateString();
+  if (currentLog.length === 0) {
+    return [{ date: today, count: 1 }];
+  }
+  const lastEntry = currentLog[currentLog.length - 1];
+  if (lastEntry.date !== today) {
+    return [...currentLog, { date: today, count: 1 }];
+  }
+  const updatedCount = lastEntry.count + 1;
+  return [...currentLog.slice(0, -1), { date: today, count: updatedCount }];
+};
+
 interface TimerProps {
   setPomodoroLog: React.Dispatch<React.SetStateAction<PomodoroLogEntry[]>>;
 }
@@ -35,24 +48,11 @@ const Timer = ({ setPomodoroLog }: TimerProps) => {
   }, [isRunning, setPomodoroLog]);
 
   useEffect(() => {
-    const updateLog = () => {
-      const today = new Date().toLocaleDateString();
-      setPomodoroLog((prevLog) => {
-        if (prevLog.length === 0) {
-          return [{ date: today, count: 1 }];
-        }
-        const lastEntry = prevLog[prevLog.length - 1];
-        if (lastEntry.date !== today) {
-          return [...prevLog, { date: today, count: 1 }];
-        }
-        const updatedCount = lastEntry.count + 1;
-        return [...prevLog.slice(0, -1), { date: today, count: updatedCount }];
-      });
-    };
     if (isCompleted) {
       setIsRunning(false);
-      updateLog();
+      setPomodoroLog((prevLog) => getNewPomodoroLog(prevLog));
       setIsCompleted(false);
+      setMillisecondsLeft(defaultDuration);
     }
   }, [isCompleted, setPomodoroLog]);
 
