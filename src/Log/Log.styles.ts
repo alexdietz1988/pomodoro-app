@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const LogContainer = styled.div`
+export const Container = styled.div`
   text-align: center;
   width: 50%;
 

@@ -26,7 +26,7 @@ const Log = ({ pomodoroLog, isInProgress }: LogProps) => {
     }
   );
   return (
-    <Styled.LogContainer>
+    <Styled.Container>
       <h2>{new Date().toLocaleString('default', { month: 'long' })}</h2>
       <Styled.Log>
         {datesInCurrentMonth.map((date) => {
@@ -49,7 +49,7 @@ const Log = ({ pomodoroLog, isInProgress }: LogProps) => {
           );
         })}
       </Styled.Log>
-    </Styled.LogContainer>
+    </Styled.Container>
   );
 };
 
