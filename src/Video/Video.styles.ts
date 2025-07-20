@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Iframe = styled.iframe`
   border: none;
-  width: 100%;
-  height: 400px;
+  border-radius: 0.5rem;
+  height: 18rem;
+  width: 25rem;
 `;

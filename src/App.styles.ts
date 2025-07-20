@@ -13,6 +13,18 @@ export const Content = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: end;
+`;
+
+export const ColumnOne = styled.div`
+  flex: 5;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 2rem;
+`;
+
+export const ColumnTwo = styled.div`
+  flex: 1;
 `;

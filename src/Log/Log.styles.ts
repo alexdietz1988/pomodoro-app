@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   text-align: center;
-  width: 50%;
 
   h2 {
     font-size: 1.15rem;
@@ -14,10 +13,8 @@ export const Log = styled.div`
   border: 1px solid hsl(0, 50%, 62%);
   border-radius: 0.5rem;
   padding: 0.5rem;
-  height: 10rem;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
 `;
 
 export const LogEntry = styled.div.withConfig({

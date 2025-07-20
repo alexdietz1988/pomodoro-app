@@ -37,21 +37,25 @@ const App = () => {
     <Styled.Container>
       <h1>Pomodoro App</h1>
       <Styled.Content>
-        <Timer
-          setPomodoroLog={setPomodoroLog}
-          setIsInProgress={setIsInProgress}
-        />
-        <Log pomodoroLog={pomodoroLog} isInProgress={isInProgress} />
-        <Video />
-        <button
-          onClick={() => {
-            setPomodoroLog(defaultPomodoroLog);
-            setIsResetting(true);
-          }}
-        >
-          Reset Log
-        </button>
+        <Styled.ColumnOne>
+          <Timer
+            setPomodoroLog={setPomodoroLog}
+            setIsInProgress={setIsInProgress}
+          />
+          <Video />
+        </Styled.ColumnOne>
+        <Styled.ColumnTwo>
+          <Log pomodoroLog={pomodoroLog} isInProgress={isInProgress} />
+        </Styled.ColumnTwo>
       </Styled.Content>
+      <button
+        onClick={() => {
+          setPomodoroLog(defaultPomodoroLog);
+          setIsResetting(true);
+        }}
+      >
+        Reset Log
+      </button>
     </Styled.Container>
   );
 };
