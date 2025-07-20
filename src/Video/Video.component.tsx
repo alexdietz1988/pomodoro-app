@@ -1,12 +1,13 @@
 import * as Styled from './Video.styles';
+import { videos } from './Video.data';
+
+const getRandomUrl = () =>
+  videos[Math.floor(Math.random() * videos.length)].url;
 
 const Video = () => (
-  <Styled.Iframe
-    src="https://www.youtube.com/embed/zh_pECrHHOY"
-    title="YouTube video player"
-    referrerPolicy="strict-origin-when-cross-origin"
-    allowFullScreen
-  ></Styled.Iframe>
+  <>
+    <Styled.Iframe src={getRandomUrl()} allowFullScreen />
+  </>
 );
 
 export default Video;
