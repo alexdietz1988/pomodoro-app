@@ -10,9 +10,6 @@ export const Container = styled.div`
 `;
 
 export const Log = styled.div`
-  border: 1px solid hsl(0, 50%, 62%);
-  border-radius: 0.5rem;
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
 `;
@@ -28,13 +25,18 @@ export const LogEntry = styled.div.withConfig({
   gap: 0.5rem;
 `;
 
-export const CircleContainer = styled.div`
+const TALLY_WIDTH = '1rem';
+const TALLY_GAP = '0.1rem';
+
+export const TallyContainer = styled.div`
   display: flex;
-  gap: 0.1rem;
+  flex-wrap: wrap;
+  gap: ${TALLY_GAP};
+  width: calc(${TALLY_WIDTH} * 4 + ${TALLY_GAP} * 4);
 `;
 
-export const Circle = styled.div<{ inProgress?: boolean }>`
-  width: 1rem;
+export const Tally = styled.div<{ inProgress?: boolean }>`
+  width: ${TALLY_WIDTH};
   height: 1rem;
   border-radius: 50%;
   background-color: hsl(0, 100%, 62%);

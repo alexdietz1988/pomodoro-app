@@ -36,15 +36,17 @@ const Log = ({ pomodoroLog, isInProgress }: LogProps) => {
           return (
             <Styled.LogEntry isWeekend={date.isWeekend} key={date.fullDate}>
               <div>{date.date}</div>
-              <Styled.CircleContainer>
+              <Styled.TallyContainer>
                 {logEntry &&
                   Array(logEntry.count)
                     .fill(0)
-                    .map((_, i) => <Styled.Circle key={`circle-${i}`} />)}
+                    .map((_, i) => (
+                      <Styled.Tally key={`tally-${date.date}-${i}`} />
+                    ))}
                 {isInProgress && date.fullDate === today && (
-                  <Styled.Circle inProgress />
+                  <Styled.Tally inProgress />
                 )}
-              </Styled.CircleContainer>
+              </Styled.TallyContainer>
             </Styled.LogEntry>
           );
         })}
