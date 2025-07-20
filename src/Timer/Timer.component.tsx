@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import * as Styled from './Timer.styles';
 import { type PomodoroLogEntry } from '../App';
 
-// const defaultDuration = 25 * 60 * 1000;
-const defaultDuration = 3000;
+const defaultDuration = 25 * 60 * 1000;
+// const defaultDuration = 3000;
 
 const getNewPomodoroLog = (currentLog: PomodoroLogEntry[]) => {
   const today = new Date().toLocaleDateString();

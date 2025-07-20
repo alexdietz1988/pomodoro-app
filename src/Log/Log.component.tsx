@@ -35,7 +35,7 @@ const Log = ({ pomodoroLog, isInProgress }: LogProps) => {
           );
           return (
             <Styled.LogEntry isWeekend={date.isWeekend} key={date.fullDate}>
-              <div>{date.date}</div>
+              <Styled.Date>{date.date}</Styled.Date>
               <Styled.TallyContainer>
                 {logEntry &&
                   Array(logEntry.count)
