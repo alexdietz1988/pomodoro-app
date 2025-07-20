@@ -61,3 +61,40 @@ export const Tally = styled.div<{ inProgress?: boolean }>`
       animation: fadeIn 1s ease-in-out alternate infinite;
     `}
 `;
+
+export const ResetFields = styled.div`
+  margin-block-start: 0.5rem;
+  font-size: 0.75rem;
+  color: hsl(0, 0%, 50%);
+`;
+
+export const ResetButton = styled.button`
+  &:hover {
+    color: hsl(0, 0%, 80%);
+  }
+`;
+
+export const ConfirmResetFields = styled.div`
+  & > div:last-child {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block-start: 0.5rem;
+  }
+
+  button {
+    border-radius: 0.25rem;
+    padding: 0.3rem;
+    color: white;
+  }
+
+  button:first-child {
+    background-color: hsl(0, 100%, 62%);
+  }
+
+  button:last-child {
+    background-color: hsl(0, 0%, 50%);
+  }
+`;

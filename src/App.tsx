@@ -33,6 +33,11 @@ const App = () => {
     }
   }, [pomodoroLog, isResetting]);
 
+  const resetLog = () => {
+    setPomodoroLog(defaultPomodoroLog);
+    setIsResetting(true);
+  };
+
   return (
     <Styled.Container>
       <h1>Pomodoro App</h1>
@@ -45,17 +50,13 @@ const App = () => {
           <Video />
         </Styled.ColumnOne>
         <Styled.ColumnTwo>
-          <Log pomodoroLog={pomodoroLog} isInProgress={isInProgress} />
+          <Log
+            pomodoroLog={pomodoroLog}
+            isInProgress={isInProgress}
+            resetLog={resetLog}
+          />
         </Styled.ColumnTwo>
       </Styled.Content>
-      <button
-        onClick={() => {
-          setPomodoroLog(defaultPomodoroLog);
-          setIsResetting(true);
-        }}
-      >
-        Reset Log
-      </button>
     </Styled.Container>
   );
 };

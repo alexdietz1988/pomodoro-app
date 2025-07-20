@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import * as Styled from './Log.styles';
 import { type PomodoroLogEntry } from '../App';
 
 interface LogProps {
   pomodoroLog: PomodoroLogEntry[];
   isInProgress: boolean;
+  resetLog: () => void;
 }
 
-const Log = ({ pomodoroLog, isInProgress }: LogProps) => {
+const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
   const today = new Date().toLocaleDateString();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
@@ -25,6 +27,23 @@ const Log = ({ pomodoroLog, isInProgress }: LogProps) => {
       };
     }
   );
+  const [readyToReset, setReadyToReset] = useState(false);
+
+  const initiateResetButton = (
+    <Styled.ResetButton onClick={() => setReadyToReset(true)}>
+      Reset Log
+    </Styled.ResetButton>
+  );
+  const confirmResetFields = (
+    <Styled.ConfirmResetFields>
+      <div>Are you sure?</div>
+      <div>
+        <button onClick={resetLog}>Reset</button>
+        <button onClick={() => setReadyToReset(false)}>Never Mind</button>
+      </div>
+    </Styled.ConfirmResetFields>
+  );
+
   return (
     <Styled.Container>
       <h2>{new Date().toLocaleString('default', { month: 'long' })}</h2>
@@ -50,6 +69,9 @@ const Log = ({ pomodoroLog, isInProgress }: LogProps) => {
             </Styled.LogEntry>
           );
         })}
+        <Styled.ResetFields>
+          {readyToReset ? confirmResetFields : initiateResetButton}
+        </Styled.ResetFields>
       </Styled.Log>
     </Styled.Container>
   );
