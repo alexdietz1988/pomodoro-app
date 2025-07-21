@@ -29,4 +29,40 @@ const lofiGirlVideos = [
   },
 ];
 
-export const videos = [...rotiVideos, ...lofiGirlVideos];
+export const musicVideos = [...rotiVideos, ...lofiGirlVideos];
+
+export const whiteNoiseVideos = [
+  {
+    url: 'https://www.youtube.com/embed/eTeD8DAta4c',
+    channel: 'Relaxing White Noise',
+    title: 'Relaxing Rain Sounds = Drifting to Sleep 😴',
+  },
+  {
+    url: 'https://www.youtube.com/embed/wzjWIxXBs_s',
+    channel: 'Relaxing White Noise',
+    title:
+      'CELESTIAL WHITE NOISE | Sleep Better, Reduce Stress, Calm Your Mind, Improve Focus | 10 Hour Ambient',
+  },
+  {
+    url: 'https://www.youtube.com/embed/5dden6Vqj4A',
+    channel: 'Relaxing White Noise',
+    title: 'White Noise for Sleep & Relaxation',
+  },
+  {
+    url: 'https://www.youtube.com/embed/aC8GBmutlzM',
+    channel: "Nature's Eye",
+    title:
+      '4K Gentle Mountain River in Montana Backcountry | Water Sounds White Noise | Sleep and Relaxation',
+  },
+  {
+    url: 'https://www.youtube.com/embed/xNN7iTA57jM',
+    channel: 'The Guild of Ambience',
+    title: 'Forest Sounds | Woodland Ambience, Bird Song',
+  },
+  {
+    url: 'https://www.youtube.com/embed/P0-ymKmO1vI',
+    channel: 'ASMR Ambience Sound',
+    title:
+      'Trans-Siberian Railway ambience on a rainy night | train and rain sounds for 10 hours',
+  },
+];
