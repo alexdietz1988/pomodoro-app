@@ -28,6 +28,10 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
     }
   );
   const [readyToReset, setReadyToReset] = useState(false);
+  const handleReset = () => {
+    resetLog();
+    setReadyToReset(false);
+  };
 
   const initiateResetButton = (
     <Styled.ResetButton onClick={() => setReadyToReset(true)}>
@@ -38,7 +42,7 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
     <Styled.ConfirmResetFields>
       <div>Are you sure?</div>
       <div>
-        <button onClick={resetLog}>Reset</button>
+        <button onClick={handleReset}>Reset</button>
         <button onClick={() => setReadyToReset(false)}>Never Mind</button>
       </div>
     </Styled.ConfirmResetFields>

@@ -38,6 +38,7 @@ const Video = () => {
       <button onClick={handleSwitchVideoType}>
         Switch to {videoType === 'music' ? 'White Noise' : 'Music'}
       </button>
+      <button>Pause Video</button>
     </>
   );
 };
