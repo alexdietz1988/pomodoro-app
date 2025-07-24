@@ -31,7 +31,11 @@ const Video = () => {
 
   return (
     <>
-      <Styled.Iframe src={videoUrl} allowFullScreen />
+      <Styled.Iframe
+        src={videoUrl}
+        allowFullScreen
+        referrerPolicy="strict-origin-when-cross-origin"
+      />
       <button onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}>
         Switch Video
       </button>
