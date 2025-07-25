@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as Styled from './Timer.styles';
 import { type PomodoroLogEntry } from '../App';
+import bell from '../bell.wav';
 
 const defaultDuration = 25 * 60 * 1000;
 // const defaultDuration = 3000;
@@ -28,7 +29,6 @@ const formatTime = (time: number) =>
 
 const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
   const [isRunning, setIsRunning] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
 
   const minutesLeft = formatTime(millisecondsLeft / 1000 / 60);
@@ -36,27 +36,25 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
   document.title = `Pomodoro App (${minutesLeft}:${secondsLeft})`;
 
   useEffect(() => {
+    const audio = new Audio(bell);
+    const handleComplete = () => {
+      audio.play();
+      setIsRunning(false);
+      setIsInProgress(false);
+      setPomodoroLog((prevLog) => getNewPomodoroLog(prevLog));
+      setTimeout(() => setMillisecondsLeft(defaultDuration), 2000);
+    };
     if (!isRunning) return;
     const interval = setInterval(() => {
       setMillisecondsLeft((prev) => {
         if (prev === 1000) {
-          setIsCompleted(true);
+          handleComplete();
         }
         return prev - 1000;
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [isRunning, setPomodoroLog]);
-
-  useEffect(() => {
-    if (isCompleted) {
-      setIsRunning(false);
-      setIsInProgress(false);
-      setPomodoroLog((prevLog) => getNewPomodoroLog(prevLog));
-      setIsCompleted(false);
-      setMillisecondsLeft(defaultDuration);
-    }
-  }, [isCompleted, setPomodoroLog, setIsInProgress]);
+  }, [isRunning, setPomodoroLog, setIsInProgress]);
 
   return (
     <Styled.Timer>
