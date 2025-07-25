@@ -59,7 +59,7 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
           return (
             <Styled.LogEntry isWeekend={date.isWeekend} key={date.fullDate}>
               <Styled.TodayIndicator show={date.fullDate === today}>
-                <div></div>
+                <div />
               </Styled.TodayIndicator>
               <Styled.Date>{date.date}</Styled.Date>
               <Styled.TallyContainer>
