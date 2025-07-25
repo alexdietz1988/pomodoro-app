@@ -10,8 +10,8 @@ export const Container = styled.div`
 export const Iframe = styled.iframe`
   border: none;
   border-radius: 0.5rem;
-  height: 18rem;
-  width: 100%;
+  width: 80%;
+  aspect-ratio: 16 / 9;
 `;
 
 export const SwitchVideoButtons = styled.div`
