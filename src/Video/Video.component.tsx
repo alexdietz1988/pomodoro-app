@@ -3,6 +3,9 @@ import * as Styled from './Video.styles';
 import { musicVideos, whiteNoiseVideos } from './Video.data';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Form from 'react-bootstrap/Form';
+
+import { FaRandom } from 'react-icons/fa';
 
 interface Video {
   url: string;
@@ -24,6 +27,7 @@ const getRandomUrl = (videoType: VideoType, url?: string) => {
 const Video = () => {
   const [videoType, setVideoType] = useState<VideoType>('music');
   const [videoUrl, setVideoUrl] = useState(getRandomUrl('music'));
+  const videos = videoType === 'whiteNoise' ? whiteNoiseVideos : musicVideos;
 
   const handleSwitchVideoType = (newVideoType: VideoType) => {
     setVideoType(newVideoType);
@@ -50,13 +54,23 @@ const Video = () => {
         referrerPolicy="strict-origin-when-cross-origin"
       />
 
-      <Button
-        variant="light"
-        size="sm"
-        onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}
-      >
-        Switch Video
-      </Button>
+      <div>
+        <Button
+          variant="light"
+          size="sm"
+          onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}
+        >
+          <FaRandom />
+          <span> Random Video</span>
+        </Button>
+        <Form.Select size="sm" onChange={(e) => setVideoUrl(e.target.value)}>
+          {videos.map((video: Video) => (
+            <option key={video.url} value={video.url}>
+              {video.title}
+            </option>
+          ))}
+        </Form.Select>
+      </div>
       <ButtonGroup>
         {videoTypeButton('music')}
         {videoTypeButton('whiteNoise')}
