@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { default as BootstrapButton } from 'react-bootstrap/Button';
 
 export const Timer = styled.div`
   border-radius: 1rem;
@@ -11,10 +10,10 @@ export const Timer = styled.div`
   }
 `;
 
-export const Button = styled(BootstrapButton)`
-  background-color: hsl(0, 75%, 50%);
-  border: none;
-  color: hsl(0, 0%, 100%);
+export const Button = styled.button`
+  border: 1px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 
   svg {
     display: block;
@@ -22,9 +21,8 @@ export const Button = styled(BootstrapButton)`
     height: 1rem;
   }
 
-  --bs-btn-active-bg: hsl(0, 75%, 40%);
-
   &:hover {
-    background-color: var(--bs-btn-active-bg);
+    background-color: white;
+    color: black;
   }
 `;

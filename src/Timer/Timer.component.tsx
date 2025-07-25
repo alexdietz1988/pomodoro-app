@@ -65,7 +65,6 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
         {minutesLeft}:{secondsLeft}
       </div>
       <Styled.Button
-        size="lg"
         onClick={() => {
           if (!isRunning) {
             setIsInProgress(true);
