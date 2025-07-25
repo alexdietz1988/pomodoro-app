@@ -14,7 +14,7 @@ const TALLY_GAP = '0.1rem';
 export const Log = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${TALLY_GAP};
+  gap: 0.2rem;
 `;
 
 export const LogEntry = styled.div.withConfig({
@@ -25,10 +25,10 @@ export const LogEntry = styled.div.withConfig({
   color: ${(props) => (props.isWeekend ? 'pink' : 'inherit')};
   display: flex;
   align-items: start;
-  gap: 0.5rem;
 `;
 
 export const Date = styled.div`
+  margin-inline-end: 0.5rem;
   line-height: 1;
 `;
 
@@ -62,6 +62,22 @@ export const Tally = styled.div<{ inProgress?: boolean }>`
       background-color: hsl(0, 100%, 60%);
       animation: fadeIn 1s ease-in-out alternate infinite;
     `}
+`;
+
+export const TodayIndicator = styled.div<{ show?: boolean }>`
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    width: 0.3rem;
+    aspect-ratio: 1;
+    background-color: ${(props) =>
+      props.show ? 'hsl(0, 100%, 62%)' : 'transparent'};
+    border-radius: 50%;
+  }
 `;
 
 export const ResetFields = styled.div`

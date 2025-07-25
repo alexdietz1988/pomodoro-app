@@ -10,7 +10,6 @@ interface LogProps {
 
 const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
   const today = new Date().toLocaleDateString();
-  console.log(today)
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   const datesInCurrentMonth = Array.from(
@@ -59,6 +58,9 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
           );
           return (
             <Styled.LogEntry isWeekend={date.isWeekend} key={date.fullDate}>
+              <Styled.TodayIndicator show={date.fullDate === today}>
+                <div></div>
+              </Styled.TodayIndicator>
               <Styled.Date>{date.date}</Styled.Date>
               <Styled.TallyContainer>
                 {logEntry &&
