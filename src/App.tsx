@@ -40,7 +40,6 @@ const App = () => {
 
   return (
     <Styled.Container>
-      <h1>Pomodoro App</h1>
       <Styled.Content>
         <Styled.ColumnOne>
           <Timer
