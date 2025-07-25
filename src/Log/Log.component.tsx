@@ -110,10 +110,10 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
             </Styled.LogEntry>
           );
         })}
-        <Styled.ResetFields>
-          {readyToReset ? confirmResetFields : initiateResetButton}
-        </Styled.ResetFields>
       </Styled.Log>
+      <Styled.ResetFields>
+        {readyToReset ? confirmResetFields : initiateResetButton}
+      </Styled.ResetFields>
     </Styled.Container>
   );
 };

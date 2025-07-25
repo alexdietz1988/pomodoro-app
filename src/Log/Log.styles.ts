@@ -27,6 +27,7 @@ export const Log = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  height: calc(31rem + (31 * 0.2rem));
 `;
 
 export const LogEntry = styled.div.withConfig({
