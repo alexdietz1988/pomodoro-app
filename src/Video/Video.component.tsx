@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import * as Styled from './Video.styles';
 import { musicVideos, whiteNoiseVideos } from './Video.data';
+import Button from 'react-bootstrap/Button';
 
 interface Video {
   url: string;
@@ -36,12 +37,15 @@ const Video = () => {
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
       />
-      <button onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}>
+      <Button
+        variant="light"
+        onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}
+      >
         Switch Video
-      </button>
-      <button onClick={handleSwitchVideoType}>
+      </Button>
+      <Button onClick={handleSwitchVideoType}>
         Switch to {videoType === 'music' ? 'White Noise' : 'Music'}
-      </button>
+      </Button>
     </>
   );
 };

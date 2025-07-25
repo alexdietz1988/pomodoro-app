@@ -3,6 +3,8 @@ import * as Styled from './Timer.styles';
 import { type PomodoroLogEntry } from '../App';
 import bell from '../bell.wav';
 
+import Button from 'react-bootstrap/Button';
+
 const defaultDuration = 25 * 60 * 1000;
 // const defaultDuration = 3000;
 
@@ -61,7 +63,8 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
       <div>
         {minutesLeft}:{secondsLeft}
       </div>
-      <button
+      <Button
+        variant="light"
         onClick={() => {
           if (!isRunning) {
             setIsInProgress(true);
@@ -71,7 +74,7 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
         }}
       >
         {isRunning ? 'Pause' : 'Start'}
-      </button>
+      </Button>
     </Styled.Timer>
   );
 };
