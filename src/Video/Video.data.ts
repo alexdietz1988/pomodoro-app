@@ -49,12 +49,6 @@ export const whiteNoiseVideos = [
     title: 'White Noise for Sleep & Relaxation',
   },
   {
-    url: 'https://www.youtube.com/embed/aC8GBmutlzM',
-    channel: "Nature's Eye",
-    title:
-      '4K Gentle Mountain River in Montana Backcountry | Water Sounds White Noise | Sleep and Relaxation',
-  },
-  {
     url: 'https://www.youtube.com/embed/xNN7iTA57jM',
     channel: 'The Guild of Ambience',
     title: 'Forest Sounds | Woodland Ambience, Bird Song',

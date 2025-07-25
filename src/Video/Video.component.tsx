@@ -4,7 +4,6 @@ import { musicVideos, whiteNoiseVideos } from './Video.data';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
-
 import { FaRandom } from 'react-icons/fa';
 
 interface Video {
@@ -47,35 +46,39 @@ const Video = () => {
   );
 
   return (
-    <>
+    <Styled.Container>
       <Styled.Iframe
         src={videoUrl}
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
       />
-
-      <div>
+      <ButtonGroup>
+        {videoTypeButton('music')}
+        {videoTypeButton('whiteNoise')}
+      </ButtonGroup>
+      <Styled.SwitchVideoButtons>
         <Button
-          variant="light"
+          variant="outline-light"
           size="sm"
           onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}
         >
           <FaRandom />
           <span> Random Video</span>
         </Button>
-        <Form.Select size="sm" onChange={(e) => setVideoUrl(e.target.value)}>
+        <Form.Select
+          size="sm"
+          onChange={(e) => e.target.value && setVideoUrl(e.target.value)}
+          name="selectVideo"
+        >
+          <option value="">☞ Select Video</option>
           {videos.map((video: Video) => (
             <option key={video.url} value={video.url}>
               {video.title}
             </option>
           ))}
         </Form.Select>
-      </div>
-      <ButtonGroup>
-        {videoTypeButton('music')}
-        {videoTypeButton('whiteNoise')}
-      </ButtonGroup>
-    </>
+      </Styled.SwitchVideoButtons>
+    </Styled.Container>
   );
 };
 
