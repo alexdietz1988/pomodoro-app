@@ -2,6 +2,7 @@ import { useState } from 'react';
 import * as Styled from './Video.styles';
 import { musicVideos, whiteNoiseVideos } from './Video.data';
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 interface Video {
   url: string;
@@ -24,11 +25,22 @@ const Video = () => {
   const [videoType, setVideoType] = useState<VideoType>('music');
   const [videoUrl, setVideoUrl] = useState(getRandomUrl('music'));
 
-  const handleSwitchVideoType = () => {
-    const newVideoType = videoType === 'music' ? 'whiteNoise' : 'music';
+  const handleSwitchVideoType = (newVideoType: VideoType) => {
     setVideoType(newVideoType);
     setVideoUrl(getRandomUrl(newVideoType, videoUrl));
   };
+
+  const videoTypeButton = (buttonVideoType: VideoType) => (
+    <Button
+      variant={
+        videoType === buttonVideoType ? 'secondary' : 'outline-secondary'
+      }
+      onClick={() => handleSwitchVideoType(buttonVideoType)}
+      size="sm"
+    >
+      {buttonVideoType === 'music' ? 'Music' : 'White Noise'}
+    </Button>
+  );
 
   return (
     <>
@@ -37,15 +49,18 @@ const Video = () => {
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
       />
+
       <Button
         variant="light"
+        size="sm"
         onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}
       >
         Switch Video
       </Button>
-      <Button onClick={handleSwitchVideoType}>
-        Switch to {videoType === 'music' ? 'White Noise' : 'Music'}
-      </Button>
+      <ButtonGroup>
+        {videoTypeButton('music')}
+        {videoTypeButton('whiteNoise')}
+      </ButtonGroup>
     </>
   );
 };
