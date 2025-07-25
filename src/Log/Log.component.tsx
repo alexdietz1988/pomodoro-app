@@ -50,7 +50,9 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
 
   return (
     <Styled.Container>
-      <h2>{new Date().toLocaleString('default', { month: 'long' })}</h2>
+      <h2>
+        {currentMonth + 1}/{currentYear.toString().slice(-2)}
+      </h2>
       <Styled.Log>
         {datesInCurrentMonth.map((date) => {
           const logEntry = pomodoroLog.find(

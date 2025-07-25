@@ -41,7 +41,7 @@ const Video = () => {
       onClick={() => handleSwitchVideoType(buttonVideoType)}
       size="sm"
     >
-      {buttonVideoType === 'music' ? 'Music' : 'White Noise'}
+      {buttonVideoType === 'music' ? 'Music' : 'Noise'}
     </Button>
   );
 

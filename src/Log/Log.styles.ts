@@ -4,7 +4,7 @@ export const Container = styled.div`
   text-align: center;
 
   h2 {
-    font-size: 1.15rem;
+    font-size: initial;
     margin-block-end: 1rem;
   }
 `;
