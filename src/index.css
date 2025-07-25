@@ -1,7 +1,4 @@
 body {
-  max-width: 800px;
-  margin-inline: auto;
-  padding: 4rem 2rem;
   background-color: hsl(0, 0%, 20%);
   color: white;
 }

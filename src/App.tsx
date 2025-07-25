@@ -41,20 +41,20 @@ const App = () => {
   return (
     <Styled.Container>
       <Styled.Content>
-        <Styled.ColumnOne>
+        <Styled.TimerAndVideoContainer>
           <Timer
             setPomodoroLog={setPomodoroLog}
             setIsInProgress={setIsInProgress}
           />
           <Video />
-        </Styled.ColumnOne>
-        <Styled.ColumnTwo>
+        </Styled.TimerAndVideoContainer>
+        <div>
           <Log
             pomodoroLog={pomodoroLog}
             isInProgress={isInProgress}
             resetLog={resetLog}
           />
-        </Styled.ColumnTwo>
+        </div>
       </Styled.Content>
     </Styled.Container>
   );
