@@ -4,7 +4,16 @@ import Timer from './Timer/Timer.component.tsx';
 import Log from './Log/Log.component.tsx';
 import Video from './Video/Video.component.tsx';
 
-const defaultPomodoroLog: PomodoroLogEntry[] = [];
+const defaultPomodoroLog: PomodoroLogEntry[] = [
+  {
+    date: '7/24/2025',
+    count: 4,
+  },
+  {
+    date: '7/25/2025',
+    count: 4,
+  },
+];
 
 export interface PomodoroLogEntry {
   date: string;

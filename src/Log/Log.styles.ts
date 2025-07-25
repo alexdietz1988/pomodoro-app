@@ -9,9 +9,12 @@ export const Container = styled.div`
   }
 `;
 
+const TALLY_GAP = '0.1rem';
+
 export const Log = styled.div`
   display: flex;
   flex-direction: column;
+  gap: ${TALLY_GAP};
 `;
 
 export const LogEntry = styled.div.withConfig({
@@ -30,7 +33,6 @@ export const Date = styled.div`
 `;
 
 const TALLY_WIDTH = '1rem';
-const TALLY_GAP = '0.1rem';
 
 export const TallyContainer = styled.div`
   display: flex;

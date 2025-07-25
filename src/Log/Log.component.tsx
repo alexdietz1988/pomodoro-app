@@ -10,6 +10,7 @@ interface LogProps {
 
 const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
   const today = new Date().toLocaleDateString();
+  console.log(today)
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   const datesInCurrentMonth = Array.from(
