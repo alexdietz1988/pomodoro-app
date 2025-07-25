@@ -10,7 +10,6 @@ export const Container = styled.div`
 export const Iframe = styled.iframe`
   border: none;
   border-radius: 0.5rem;
-  width: 80%;
   aspect-ratio: 16 / 9;
 `;
 
@@ -21,7 +20,7 @@ export const SwitchVideoButtons = styled.div`
 
   & > * {
     flex: 1;
-    padding-inline: 0.5rem;
+    padding-inline: 0.25rem;
   }
 
   & > select {
@@ -30,5 +29,6 @@ export const SwitchVideoButtons = styled.div`
     color: white;
     text-align: center;
     max-width: 30ch;
+    text-overflow: ellipsis;
   }
 `;

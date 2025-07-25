@@ -63,14 +63,14 @@ const Video = () => {
           onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}
         >
           <FaRandom />
-          <span> Random Video</span>
+          <span> Random</span>
         </Button>
         <Form.Select
           size="sm"
           onChange={(e) => e.target.value && setVideoUrl(e.target.value)}
           name="selectVideo"
         >
-          <option value="">☞ Select Video</option>
+          <option value="">☞ Select</option>
           {videos.map((video: Video) => (
             <option key={video.url} value={video.url}>
               {video.channel} | {video.title}

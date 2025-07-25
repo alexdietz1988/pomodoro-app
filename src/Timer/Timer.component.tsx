@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import * as Styled from './Timer.styles';
 import { type PomodoroLogEntry } from '../App';
 import bell from '../bell.wav';
+import { FaPlay, FaPause } from 'react-icons/fa';
 
 const defaultDuration = 25 * 60 * 1000;
 // const defaultDuration = 3000;
@@ -33,7 +34,9 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
 
   const minutesLeft = formatTime(millisecondsLeft / 1000 / 60);
   const secondsLeft = formatTime((millisecondsLeft / 1000) % 60);
-  document.title = `Pomodoro App (${minutesLeft}:${secondsLeft})`;
+  if (millisecondsLeft !== defaultDuration) {
+    document.title = `${minutesLeft}:${secondsLeft}`;
+  }
 
   useEffect(() => {
     const audio = new Audio(bell);
@@ -71,7 +74,7 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
           setIsRunning((prev) => !prev);
         }}
       >
-        {isRunning ? 'Pause' : 'Start'}
+        {isRunning ? <FaPause /> : <FaPlay />}
       </Styled.Button>
     </Styled.Timer>
   );
