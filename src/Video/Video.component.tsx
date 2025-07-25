@@ -73,7 +73,7 @@ const Video = () => {
           <option value="">☞ Select Video</option>
           {videos.map((video: Video) => (
             <option key={video.url} value={video.url}>
-              {video.title}
+              {video.channel} | {video.title}
             </option>
           ))}
         </Form.Select>
