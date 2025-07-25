@@ -12,12 +12,19 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
   const today = new Date().toLocaleDateString();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
-  const datesInCurrentMonth = Array.from(
+
+  const [selectedDates, setSelectedDates] = useState({
+    month: currentMonth,
+    year: currentYear,
+  });
+  const { month, year } = selectedDates;
+
+  const datesInMonth = Array.from(
     {
-      length: new Date(currentYear, currentMonth + 1, 0).getDate(),
+      length: new Date(year, month + 1, 0).getDate(),
     },
     (_, i) => {
-      const newDate = new Date(currentYear, currentMonth, i + 1);
+      const newDate = new Date(year, month, i + 1);
       const day = newDate.getDay();
       const date = newDate.getDate();
       return {
@@ -48,13 +55,38 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
     </Styled.ConfirmResetFields>
   );
 
+  const handleChangeMonth = (direction: 'next' | 'prev') => {
+    setSelectedDates((prev) => {
+      const newMonth = direction === 'next' ? prev.month + 1 : prev.month - 1;
+      const newYear =
+        newMonth < 0
+          ? prev.year - 1
+          : newMonth > 11
+          ? prev.year + 1
+          : prev.year;
+      return { month: (newMonth + 12) % 12, year: newYear };
+    });
+  };
+
   return (
     <Styled.Container>
       <h2>
-        {currentMonth + 1}/{currentYear.toString().slice(-2)}
+        <button onClick={() => handleChangeMonth('prev')}>{'<'}</button>
+        <span>
+          {(month + 1).toString().padStart(2, '0')}/{year.toString().slice(-2)}
+        </span>
+        {!(month === currentMonth && year === currentYear) ? (
+          <Styled.ChangeMonthButton onClick={() => handleChangeMonth('next')}>
+            {'>'}
+          </Styled.ChangeMonthButton>
+        ) : (
+          <Styled.ChangeMonthButton isHidden={true}>
+            {'>'}
+          </Styled.ChangeMonthButton>
+        )}
       </h2>
       <Styled.Log>
-        {datesInCurrentMonth.map((date) => {
+        {datesInMonth.map((date) => {
           const logEntry = pomodoroLog.find(
             (entry) => entry.date === date.fullDate
           );

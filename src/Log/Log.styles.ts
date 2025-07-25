@@ -6,7 +6,19 @@ export const Container = styled.div`
   h2 {
     font-size: initial;
     margin-block-end: 1rem;
+
+    span {
+      margin-inline: 0.5rem;
+    }
   }
+`;
+
+export const ChangeMonthButton = styled.button<{ isHidden?: boolean }>`
+  &:hover {
+    color: hsl(0, 0%, 80%);
+  }
+
+  visibility: ${(props) => props.isHidden && 'hidden'};
 `;
 
 const TALLY_GAP = '0.1rem';
