@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import * as Styled from './Video.styles';
 import { musicVideos, whiteNoiseVideos } from './Video.data';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Form from 'react-bootstrap/Form';
-import { FaRandom } from 'react-icons/fa';
+import { FaRandom, FaHandPointRight } from 'react-icons/fa';
 
 interface Video {
   url: string;
@@ -26,6 +25,8 @@ const getRandomUrl = (videoType: VideoType, url?: string) => {
 const Video = () => {
   const [videoType, setVideoType] = useState<VideoType>('music');
   const [videoUrl, setVideoUrl] = useState(getRandomUrl('music'));
+  const [openSelectVideo, setOpenSelectVideo] = useState(false);
+  const videoOptionsDialogRef = useRef<HTMLDialogElement>(null);
   const videos = videoType === 'whiteNoise' ? whiteNoiseVideos : musicVideos;
 
   const handleSwitchVideoType = (newVideoType: VideoType) => {
@@ -44,6 +45,12 @@ const Video = () => {
       {buttonVideoType === 'music' ? 'Music' : 'Noise'}
     </Button>
   );
+
+  useEffect(() => {
+    if (openSelectVideo && videoOptionsDialogRef.current) {
+      videoOptionsDialogRef.current.showModal();
+    }
+  }, [openSelectVideo]);
 
   return (
     <Styled.Container>
@@ -65,19 +72,32 @@ const Video = () => {
           <FaRandom />
           <span> Random</span>
         </Button>
-        <Form.Select
+        <Button
+          variant="outline-light"
           size="sm"
-          onChange={(e) => e.target.value && setVideoUrl(e.target.value)}
-          name="selectVideo"
+          onClick={() => setOpenSelectVideo(true)}
         >
-          <option value="">☞ Select</option>
-          {videos.map((video: Video) => (
-            <option key={video.url} value={video.url}>
-              {video.channel} | {video.title}
-            </option>
-          ))}
-        </Form.Select>
+          <FaHandPointRight />
+          <span> Select</span>
+        </Button>
       </Styled.SwitchVideoButtons>
+      {openSelectVideo && (
+        <Styled.VideoOptionsDialog ref={videoOptionsDialogRef}>
+          {videos.map((video: Video) => (
+            <button
+              onClick={() => {
+                setVideoUrl(video.url);
+                setOpenSelectVideo(false);
+              }}
+            >
+              {video.channel} | {video.title}
+            </button>
+          ))}
+          <Styled.DialogCloseButton onClick={() => setOpenSelectVideo(false)}>
+            x
+          </Styled.DialogCloseButton>
+        </Styled.VideoOptionsDialog>
+      )}
     </Styled.Container>
   );
 };

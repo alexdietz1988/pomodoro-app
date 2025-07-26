@@ -11,24 +11,18 @@ export const Iframe = styled.iframe`
   border: none;
   border-radius: 0.5rem;
   aspect-ratio: 16 / 9;
+  width: 100%;
 `;
 
 export const SwitchVideoButtons = styled.div`
-  width: 75%;
   display: flex;
   gap: 1rem;
-
-  & > * {
-    flex: 1;
-    padding-inline: 0.25rem;
-  }
-
-  & > select {
-    --bs-form-select-bg-img: none;
-    background-color: transparent;
-    color: white;
-    text-align: center;
-    max-width: 30ch;
-    text-overflow: ellipsis;
-  }
 `;
+
+export const VideoOptionsDialog = styled.dialog`
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 0.75rem;
+`;
+
+export const DialogCloseButton = styled.button``;
