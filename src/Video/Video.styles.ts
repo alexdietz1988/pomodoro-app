@@ -33,6 +33,11 @@ export const Buttons = styled.div`
 `;
 
 export const VideoTypeButton = styled.button<{ isActive?: boolean }>`
+  line-height: 1;
+
+  svg {
+    vertical-align: middle;
+  }
   &:first-child {
     border-end-end-radius: 0;
     border-start-end-radius: 0;

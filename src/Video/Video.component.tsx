@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import * as Styled from './Video.styles';
 import { musicVideos, whiteNoiseVideos } from './Video.data';
-import { FaRandom, FaHandPointRight, FaPlus } from 'react-icons/fa';
-import { IoIosClose } from 'react-icons/io';
+import { FaRandom, FaHandPointRight, FaPlus, FaFan } from 'react-icons/fa';
+import { IoIosClose, IoIosMusicalNotes } from 'react-icons/io';
 
 interface Video {
   url: string;
@@ -57,13 +57,13 @@ const Video = () => {
             onClick={() => handleSwitchVideoType('music')}
             isActive={videoType === 'music'}
           >
-            Music
+            <IoIosMusicalNotes />
           </Styled.VideoTypeButton>
           <Styled.VideoTypeButton
             onClick={() => handleSwitchVideoType('whiteNoise')}
             isActive={videoType === 'whiteNoise'}
           >
-            Noise
+            <FaFan />
           </Styled.VideoTypeButton>
         </div>
 
