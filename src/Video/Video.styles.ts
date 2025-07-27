@@ -77,3 +77,5 @@ export const DialogCloseButton = styled.button`
   align-items: center;
   column-gap: 0.25rem;
 `;
+
+export const VideoInputForm = styled.form``;

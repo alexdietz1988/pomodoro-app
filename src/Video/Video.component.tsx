@@ -25,6 +25,7 @@ const Video = () => {
   const [videoType, setVideoType] = useState<VideoType>('music');
   const [videoUrl, setVideoUrl] = useState(getRandomUrl('music'));
   const [openSelectVideo, setOpenSelectVideo] = useState(false);
+  const [showVideoInput, setShowVideoInput] = useState(false);
   const videoOptionsDialogRef = useRef<HTMLDialogElement>(null);
   const videos = videoType === 'whiteNoise' ? whiteNoiseVideos : musicVideos;
 
@@ -74,7 +75,22 @@ const Video = () => {
           <FaHandPointRight />
           <span>Select</span>
         </button>
+        <button onClick={() => setShowVideoInput((prev) => !prev)}>Add</button>
       </Styled.SwitchVideoButtons>
+      {showVideoInput && (
+        <Styled.VideoInputForm
+          onSubmit={(e) => {
+            e.preventDefault();
+            const videoId = e.target.videoUrl.value.slice(-11);
+            const newUrl = `https://www.youtube.com/embed/${videoId}`;
+            setVideoUrl(newUrl);
+            setShowVideoInput(false);
+          }}
+        >
+          <input name="videoUrl" />
+          <button type="submit">Submit</button>
+        </Styled.VideoInputForm>
+      )}
       {openSelectVideo && (
         <Styled.VideoOptionsDialog ref={videoOptionsDialogRef}>
           <Styled.VideoOptions>
