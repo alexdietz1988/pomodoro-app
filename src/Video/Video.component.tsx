@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import * as Styled from './Video.styles';
 import { musicVideos, whiteNoiseVideos } from './Video.data';
-import { FaRandom, FaHandPointRight } from 'react-icons/fa';
+import { FaRandom, FaHandPointRight, FaPlus } from 'react-icons/fa';
 import { IoIosClose } from 'react-icons/io';
 
 interface Video {
@@ -51,43 +51,48 @@ const Video = () => {
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
       />
-      <div>
-        <Styled.VideoTypeButton
-          onClick={() => handleSwitchVideoType('music')}
-          isActive={videoType === 'music'}
-        >
-          Music
-        </Styled.VideoTypeButton>
-        <Styled.VideoTypeButton
-          onClick={() => handleSwitchVideoType('whiteNoise')}
-          isActive={videoType === 'whiteNoise'}
-        >
-          Noise
-        </Styled.VideoTypeButton>
-      </div>
+      <Styled.Buttons>
+        <div>
+          <Styled.VideoTypeButton
+            onClick={() => handleSwitchVideoType('music')}
+            isActive={videoType === 'music'}
+          >
+            Music
+          </Styled.VideoTypeButton>
+          <Styled.VideoTypeButton
+            onClick={() => handleSwitchVideoType('whiteNoise')}
+            isActive={videoType === 'whiteNoise'}
+          >
+            Noise
+          </Styled.VideoTypeButton>
+        </div>
 
-      <Styled.SwitchVideoButtons>
-        <button onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}>
-          <FaRandom />
-          <span>Random</span>
-        </button>
-        <button onClick={() => setOpenSelectVideo(true)}>
-          <FaHandPointRight />
-          <span>Select</span>
-        </button>
-        <button onClick={() => setShowVideoInput((prev) => !prev)}>Add</button>
-      </Styled.SwitchVideoButtons>
+        <Styled.SwitchVideoButtons>
+          <button
+            onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}
+          >
+            <FaRandom />
+          </button>
+          <button onClick={() => setOpenSelectVideo(true)}>
+            <FaHandPointRight />
+          </button>
+          <button onClick={() => setShowVideoInput((prev) => !prev)}>
+            <FaPlus />
+          </button>
+        </Styled.SwitchVideoButtons>
+      </Styled.Buttons>
       {showVideoInput && (
         <Styled.VideoInputForm
           onSubmit={(e) => {
             e.preventDefault();
             const videoId = e.target.videoUrl.value.slice(-11);
+            if (!videoId) return;
             const newUrl = `https://www.youtube.com/embed/${videoId}`;
             setVideoUrl(newUrl);
             setShowVideoInput(false);
           }}
         >
-          <input name="videoUrl" />
+          <input name="videoUrl" placeholder="Paste YouTube url" />
           <button type="submit">Submit</button>
         </Styled.VideoInputForm>
       )}

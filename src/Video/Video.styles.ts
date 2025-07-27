@@ -27,6 +27,11 @@ export const Iframe = styled.iframe`
   width: 100%;
 `;
 
+export const Buttons = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
 export const VideoTypeButton = styled.button<{ isActive?: boolean }>`
   &:first-child {
     border-end-end-radius: 0;
@@ -49,11 +54,13 @@ export const VideoTypeButton = styled.button<{ isActive?: boolean }>`
 
 export const SwitchVideoButtons = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.25rem;
   font-size: 0.9rem;
 
-  svg {
-    margin-inline-end: 0.25rem;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -78,4 +85,25 @@ export const DialogCloseButton = styled.button`
   column-gap: 0.25rem;
 `;
 
-export const VideoInputForm = styled.form``;
+export const VideoInputForm = styled.form`
+  font-size: 0.9rem;
+  display: flex;
+
+  input {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border-end-end-radius: 0;
+    border-start-end-radius: 0;
+    background-color: inherit;
+    color: white;
+    border: 1px solid white;
+    border-right-width: 0.5px;
+    font-family: inherit;
+  }
+  button {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-left-width: 0.5px;
+    padding-block: 0.25rem;
+  }
+`;
