@@ -83,9 +83,10 @@ const Video = () => {
       </Styled.Buttons>
       {showVideoInput && (
         <Styled.VideoInputForm
-          onSubmit={(e) => {
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            const videoId = e.target.videoUrl.value.slice(-11);
+            const videoUrl = (e.target as HTMLFormElement).videoUrl.value;
+            const videoId = videoUrl.slice(-11);
             if (!videoId) return;
             const newUrl = `https://www.youtube.com/embed/${videoId}`;
             setVideoUrl(newUrl);
