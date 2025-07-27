@@ -4,6 +4,7 @@ import { musicVideos, whiteNoiseVideos } from './Video.data';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { FaRandom, FaHandPointRight } from 'react-icons/fa';
+import { IoIosClose } from 'react-icons/io';
 
 interface Video {
   url: string;
@@ -49,6 +50,10 @@ const Video = () => {
   useEffect(() => {
     if (openSelectVideo && videoOptionsDialogRef.current) {
       videoOptionsDialogRef.current.showModal();
+      document.body.style.opacity = '0.25';
+    }
+    if (!openSelectVideo) {
+      document.body.style.opacity = '1';
     }
   }, [openSelectVideo]);
 
@@ -83,18 +88,21 @@ const Video = () => {
       </Styled.SwitchVideoButtons>
       {openSelectVideo && (
         <Styled.VideoOptionsDialog ref={videoOptionsDialogRef}>
-          {videos.map((video: Video) => (
-            <button
-              onClick={() => {
-                setVideoUrl(video.url);
-                setOpenSelectVideo(false);
-              }}
-            >
-              {video.channel} | {video.title}
-            </button>
-          ))}
+          <Styled.VideoOptions>
+            {videos.map((video: Video) => (
+              <button
+                onClick={() => {
+                  setVideoUrl(video.url);
+                  setOpenSelectVideo(false);
+                }}
+              >
+                {video.channel} | {video.title}
+              </button>
+            ))}
+          </Styled.VideoOptions>
           <Styled.DialogCloseButton onClick={() => setOpenSelectVideo(false)}>
-            x
+            <IoIosClose />
+            <span> Close</span>
           </Styled.DialogCloseButton>
         </Styled.VideoOptionsDialog>
       )}
