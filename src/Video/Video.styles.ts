@@ -67,6 +67,7 @@ export const VideoOptions = styled.div`
   & > button {
     display: block;
     margin-block-end: 0.5rem;
+    text-align: start;
   }
 `;
 
