@@ -107,3 +107,13 @@ export const VideoInputForm = styled.form`
     padding-block: 0.25rem;
   }
 `;
+
+export const VideoInputCloseButton = styled.div`
+  opacity: 0.5;
+  font-size: 0.8rem;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+`;

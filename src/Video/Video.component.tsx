@@ -82,20 +82,27 @@ const Video = () => {
         </Styled.SwitchVideoButtons>
       </Styled.Buttons>
       {showVideoInput && (
-        <Styled.VideoInputForm
-          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            const videoUrl = (e.target as HTMLFormElement).videoUrl.value;
-            const videoId = videoUrl.slice(-11);
-            if (!videoId) return;
-            const newUrl = `https://www.youtube.com/embed/${videoId}`;
-            setVideoUrl(newUrl);
-            setShowVideoInput(false);
-          }}
-        >
-          <input name="videoUrl" placeholder="Paste YouTube url" />
-          <button type="submit">Submit</button>
-        </Styled.VideoInputForm>
+        <>
+          <Styled.VideoInputForm
+            onSubmit={(e) => {
+              e.preventDefault();
+              const videoUrl = (e.target as HTMLFormElement).videoUrl.value;
+              const videoId = videoUrl.slice(-11);
+              if (!videoId) return;
+              const newUrl = `https://www.youtube.com/embed/${videoId}`;
+              setVideoUrl(newUrl);
+              setShowVideoInput(false);
+            }}
+          >
+            <input name="videoUrl" placeholder="Paste YouTube url" />
+            <button type="submit">Submit</button>
+          </Styled.VideoInputForm>
+          <Styled.VideoInputCloseButton
+            onClick={() => setShowVideoInput(false)}
+          >
+            Never Mind
+          </Styled.VideoInputCloseButton>
+        </>
       )}
       {openSelectVideo && (
         <Styled.VideoOptionsDialog ref={videoOptionsDialogRef}>
