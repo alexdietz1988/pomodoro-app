@@ -31,6 +31,7 @@ const formatTime = (time: number) =>
 const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
   const [isRunning, setIsRunning] = useState(false);
   const [millisecondsLeft, setMillisecondsLeft] = useState(defaultDuration);
+  const [showCompletionMessage, setShowCompletionMessage] = useState(false);
 
   const minutesLeft = formatTime(millisecondsLeft / 1000 / 60);
   const secondsLeft = formatTime((millisecondsLeft / 1000) % 60);
@@ -42,6 +43,7 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
     const audio = new Audio(bell);
     const handleComplete = () => {
       audio.play();
+      setShowCompletionMessage(true);
       setIsRunning(false);
       setIsInProgress(false);
       setPomodoroLog((prevLog) => getNewPomodoroLog(prevLog));
@@ -60,14 +62,22 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
   }, [isRunning, setPomodoroLog, setIsInProgress]);
 
   return (
-    <Styled.Timer>
-      <div>
-        {minutesLeft}:{secondsLeft}
-      </div>
+    <Styled.Container>
+      {showCompletionMessage ? (
+        <Styled.CompletionMessage>
+          <h1>Great job!</h1>
+          <h2>Ready to keep going?</h2>
+        </Styled.CompletionMessage>
+      ) : (
+        <Styled.Timer>
+          {minutesLeft}:{secondsLeft}
+        </Styled.Timer>
+      )}
       <Styled.Button
         onClick={() => {
           if (!isRunning) {
             setIsInProgress(true);
+            setShowCompletionMessage(false);
             setMillisecondsLeft((prev) => prev - 1000);
           }
           setIsRunning((prev) => !prev);
@@ -75,7 +85,7 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
       >
         {isRunning ? <FaPause /> : <FaPlay />}
       </Styled.Button>
-    </Styled.Timer>
+    </Styled.Container>
   );
 };
 
