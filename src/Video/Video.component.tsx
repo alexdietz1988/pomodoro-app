@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import * as Styled from './Video.styles';
 import { musicVideos, whiteNoiseVideos } from './Video.data';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { FaRandom, FaHandPointRight } from 'react-icons/fa';
 import { IoIosClose } from 'react-icons/io';
 
@@ -35,18 +33,6 @@ const Video = () => {
     setVideoUrl(getRandomUrl(newVideoType, videoUrl));
   };
 
-  const videoTypeButton = (buttonVideoType: VideoType) => (
-    <Button
-      variant={
-        videoType === buttonVideoType ? 'secondary' : 'outline-secondary'
-      }
-      onClick={() => handleSwitchVideoType(buttonVideoType)}
-      size="sm"
-    >
-      {buttonVideoType === 'music' ? 'Music' : 'Noise'}
-    </Button>
-  );
-
   useEffect(() => {
     if (openSelectVideo && videoOptionsDialogRef.current) {
       videoOptionsDialogRef.current.showModal();
@@ -64,27 +50,30 @@ const Video = () => {
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
       />
-      <ButtonGroup>
-        {videoTypeButton('music')}
-        {videoTypeButton('whiteNoise')}
-      </ButtonGroup>
+      <div>
+        <Styled.VideoTypeButton
+          onClick={() => handleSwitchVideoType('music')}
+          isActive={videoType === 'music'}
+        >
+          Music
+        </Styled.VideoTypeButton>
+        <Styled.VideoTypeButton
+          onClick={() => handleSwitchVideoType('whiteNoise')}
+          isActive={videoType === 'whiteNoise'}
+        >
+          Noise
+        </Styled.VideoTypeButton>
+      </div>
+
       <Styled.SwitchVideoButtons>
-        <Button
-          variant="outline-light"
-          size="sm"
-          onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}
-        >
+        <button onClick={() => setVideoUrl(getRandomUrl(videoType, videoUrl))}>
           <FaRandom />
-          <span> Random</span>
-        </Button>
-        <Button
-          variant="outline-light"
-          size="sm"
-          onClick={() => setOpenSelectVideo(true)}
-        >
+          <span>Random</span>
+        </button>
+        <button onClick={() => setOpenSelectVideo(true)}>
           <FaHandPointRight />
-          <span> Select</span>
-        </Button>
+          <span>Select</span>
+        </button>
       </Styled.SwitchVideoButtons>
       {openSelectVideo && (
         <Styled.VideoOptionsDialog ref={videoOptionsDialogRef}>
@@ -102,7 +91,7 @@ const Video = () => {
           </Styled.VideoOptions>
           <Styled.DialogCloseButton onClick={() => setOpenSelectVideo(false)}>
             <IoIosClose />
-            <span> Close</span>
+            <span>Close</span>
           </Styled.DialogCloseButton>
         </Styled.VideoOptionsDialog>
       )}

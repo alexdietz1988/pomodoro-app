@@ -1,35 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 0.75rem;
   align-items: center;
-`;
-
-export const Iframe = styled.iframe`
-  border: none;
-  border-radius: 0.5rem;
-  aspect-ratio: 16 / 9;
-  width: 100%;
-`;
-
-export const SwitchVideoButtons = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-export const VideoOptionsDialog = styled.dialog`
-  background-color: var(--color-bg);
-  border-radius: 0.5rem;
-  color: white;
 
   button {
-    font-size: 0.9rem;
     border: 1px solid white;
     border-radius: 0.25rem;
-    padding-inline: 0.25rem;
-    text-align: start;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
 
     &:hover {
       background-color: white;
@@ -39,14 +20,54 @@ export const VideoOptionsDialog = styled.dialog`
   }
 `;
 
-export const VideoOptions = styled.div`
+export const Iframe = styled.iframe`
+  border: none;
+  border-radius: 0.5rem;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+`;
+
+export const VideoTypeButton = styled.button<{ isActive?: boolean }>`
+  &:first-child {
+    border-end-end-radius: 0;
+    border-start-end-radius: 0;
+    border-right-width: 0.5px;
+  }
+  &:last-child {
+    border-end-start-radius: 0;
+    border-start-start-radius: 0;
+    border-left-width: 0.5px;
+  }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      background-color: hsl(0, 0%, 90%);
+      color: black;
+    `}
+`;
+
+export const SwitchVideoButtons = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  flex-wrap: wrap;
-  row-gap: 0.75rem;
-  margin-block-end: 1rem;
+  gap: 1rem;
+  font-size: 0.9rem;
+
+  svg {
+    margin-inline-end: 0.25rem;
+  }
+`;
+
+export const VideoOptionsDialog = styled.dialog`
+  background-color: var(--color-bg);
+  border-radius: 0.5rem;
+  color: white;
+`;
+
+export const VideoOptions = styled.div`
+  & > button {
+    display: block;
+    margin-block-end: 0.5rem;
+  }
 `;
 
 export const DialogCloseButton = styled.button`
