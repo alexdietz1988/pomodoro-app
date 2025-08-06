@@ -35,7 +35,7 @@ const Timer = ({ setPomodoroLog, setIsInProgress }: TimerProps) => {
 
   const minutesLeft = formatTime(millisecondsLeft / 1000 / 60);
   const secondsLeft = formatTime((millisecondsLeft / 1000) % 60);
-  if (millisecondsLeft !== defaultDuration) {
+  if (millisecondsLeft !== defaultDuration && millisecondsLeft >= 0) {
     document.title = `${minutesLeft}:${secondsLeft}`;
   }
 

@@ -12,6 +12,11 @@ const Log = ({ pomodoroLog, isInProgress, resetLog }: LogProps) => {
   const today = new Date().toLocaleDateString();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
+  const todaysCount = pomodoroLog.find((entry) => entry.date === today)?.count;
+
+  if (!isInProgress && todaysCount) {
+    document.title = todaysCount + ' down. Keep going!';
+  }
 
   const [selectedDates, setSelectedDates] = useState({
     month: currentMonth,
