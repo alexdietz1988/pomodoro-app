@@ -18,7 +18,7 @@ const rotiVideos = [
 
 const lofiGirlVideos = [
   {
-    url: 'https://www.youtube.com/watch?v=X4VbdwhkE10',
+    url: 'https://www.youtube.com/embed/X4VbdwhkE10',
     channel: 'Lofi Girl',
     title: 'lofi hip hop radio 📚 beats to relax/study to',
   },
